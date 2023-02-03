@@ -10,7 +10,7 @@ class Cabang extends REST_Controller {
 
    public function index_get() {
 
-   $cabang = $this->cabang->getCabang();
+   // $cabang = $this->cabang->getCabang();
    
    if($cabang) {
          $this->response([
