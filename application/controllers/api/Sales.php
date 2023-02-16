@@ -9,6 +9,8 @@ class Sales extends REST_Controller
    {
       parent::__construct();
       $this->load->model('Sales_model', 'sales');
+
+      $this->method['index_get']['limit'] = [2];
    }
 
    public function index_get()
