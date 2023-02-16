@@ -299,7 +299,7 @@ $config['rest_database_group'] = 'default';
 | The table name in your database that stores API keys
 |
 */
-$config['rest_keys_table'] = 'web_keys';
+$config['rest_keys_table'] = 'dbo.web_keys';
 
 /*
 |--------------------------------------------------------------------------
@@ -498,7 +498,7 @@ $config['rest_enable_limits'] = TRUE;
 | table name to match e.g. my_limits
 |
 */
-$config['rest_limits_table'] = 'web_limits';
+$config['rest_limits_table'] = 'dbo.web_limits';
 
 /*
 |--------------------------------------------------------------------------
