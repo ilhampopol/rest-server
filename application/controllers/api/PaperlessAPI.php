@@ -89,7 +89,7 @@ class PaperlessAPI extends REST_Controller
       if ($this->paperless->addNewForm($form_data, $file_data) > 0) {
          $this->response([
             'status' => TRUE,
-            'message' => 'New for has been created!'
+            'message' => 'Form has been created!'
          ], REST_Controller::HTTP_CREATED);
       } else {
          $this->response([
@@ -123,6 +123,24 @@ class PaperlessAPI extends REST_Controller
                'message' => 'id not found'
             ], REST_Controller::HTTP_BAD_REQUEST);
          }
+      }
+   }
+
+   public function updateFile_put()
+   {
+      $form_id = $this->put('form_id');
+      $file_data = $this->put('file_data');
+
+      if ($this->paperless->addNewForm($form_id, $file_data) > 0) {
+         $this->response([
+            'status' => TRUE,
+            'message' => 'Form has been updated'
+         ], REST_Controller::HTTP_NO_CONTENT);
+      } else {
+         $this->response([
+            'status' => FALSE,
+            'message' => 'Failed to update form.'
+         ], REST_Controller::HTTP_BAD_REQUEST);
       }
    }
 }
