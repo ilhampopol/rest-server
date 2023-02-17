@@ -55,11 +55,6 @@ class PaperlessAPI extends REST_Controller
             'status' => TRUE,
             'data' => $data
          ], REST_Controller::HTTP_OK);
-      } else {
-         $this->response([
-            'status' => FALSE,
-            'message' => 'Data Not Found!'
-         ], REST_Controller::HTTP_NOT_FOUND);
       }
    }
 
