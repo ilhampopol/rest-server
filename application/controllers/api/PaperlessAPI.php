@@ -102,18 +102,27 @@ class PaperlessAPI extends REST_Controller
    public function pengajuan_delete()
    {
       $batalID = $this->get('batalID');
-      $data = $this->paperless->batalkanPengajuan($batalID);
 
-      if ($data) {
-         $this->response([
-            'status' => TRUE,
-            'data' => $data
-         ], REST_Controller::HTTP_OK);
-      } else {
+      if ($batalID === null) {
          $this->response([
             'status' => FALSE,
-            'message' => 'Data Not Found!'
+            'message' => 'Provide an id!'
          ], REST_Controller::HTTP_BAD_REQUEST);
+      } else {
+         if ($this->paperless->batalkanPengajuan($batalID) > 0) {
+            // OK
+            $this->response([
+               'status' => TRUE,
+               'id' => $batalID,
+               'message' => 'form deleted.'
+            ], REST_Controller::HTTP_NO_CONTENT);
+         } else {
+            // form_id not found
+            $this->response([
+               'status' => FALSE,
+               'message' => 'id not found'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+         }
       }
    }
 }

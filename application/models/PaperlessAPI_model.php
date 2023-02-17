@@ -62,8 +62,6 @@ class PaperlessAPI_model extends CI_Model
 
    public function addNewForm($form_data, $file_data)
    {
-      // var_dump($form_data);
-      // die;
       $this->_server->insert('paper_file', $file_data);
       $this->_server->insert('paper_form', $form_data);
 
@@ -72,8 +70,9 @@ class PaperlessAPI_model extends CI_Model
 
    public function batalkanPengajuan($batalID)
    {
-      var_dump($this->_server->where('form_id', $batalID)->delete('paper_form'));
-      die;
+      $this->_server->where('form_id', $batalID)->delete('paper_form');
       $this->_server->where('form_id', $batalID)->delete('paper_file');
+
+      return $this->_server->affected_rows();
    }
 }
