@@ -131,7 +131,7 @@ class PaperlessAPI extends REST_Controller
       $form_id = $this->put('form_id');
       $file_data = $this->put('file_data');
 
-      if ($this->paperless->addNewForm($form_id, $file_data) > 0) {
+      if ($this->paperless->updateFile($form_id, $file_data) > 0) {
          $this->response([
             'status' => TRUE,
             'message' => 'Form has been updated'
