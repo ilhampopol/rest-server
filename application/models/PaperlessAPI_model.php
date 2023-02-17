@@ -78,8 +78,8 @@ class PaperlessAPI_model extends CI_Model
 
    public function updateFile($form_id, $file_data)
    {
-      $this->_server->where('form_id', $form_id)->update('paper_file', $file_data);
-      // $this->_server->update('paper_file', $file_data);
+      $this->_server->where('form_id', $form_id);
+      $this->_server->update('paper_file', $file_data);
 
       return $this->_server->affected_rows();
    }
