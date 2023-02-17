@@ -11,9 +11,9 @@ class PaperlessAPI extends REST_Controller
       $this->load->model('PaperlessAPI_model', 'paperless');
    }
 
-   public function paperless_get()
+   public function department_get()
    {
-      $data = $this->paperless->getForm();
+      $data = $this->paperless->getDepartment();
 
       if ($data) {
          $this->response([
@@ -28,22 +28,94 @@ class PaperlessAPI extends REST_Controller
       }
    }
 
-   public function image_get()
+   public function form_get()
    {
-      $data = $this->paperless->getImage();
+      $sort = $this->get('sort');
+      $data = $this->paperless->getForm($sort);
 
-      $image_data = base64_encode($data['PIC']);
-
-      if ($image_data) {
+      if ($data) {
          $this->response([
             'status' => TRUE,
-            'data' => $image_data
+            'data' => $data
+         ], REST_Controller::HTTP_OK);
+      } else {
+         $this->response([
+            'status' => FALSE,
+            'data' => $data
+         ], REST_Controller::HTTP_OK);
+      }
+   }
+
+   public function allForm_get()
+   {
+      $data = $this->paperless->getAllForm();
+
+      if ($data) {
+         $this->response([
+            'status' => TRUE,
+            'data' => $data
          ], REST_Controller::HTTP_OK);
       } else {
          $this->response([
             'status' => FALSE,
             'message' => 'Data Not Found!'
          ], REST_Controller::HTTP_NOT_FOUND);
+      }
+   }
+
+   public function formById_get()
+   {
+      $id = $this->get('id');
+      $data = $this->paperless->getFormById($id);
+
+      if ($data) {
+         $this->response([
+            'status' => TRUE,
+            'data' => $data
+         ], REST_Controller::HTTP_OK);
+      } else {
+         $this->response([
+            'status' => FALSE,
+            'message' => 'Data Not Found!'
+         ], REST_Controller::HTTP_NOT_FOUND);
+      }
+   }
+   
+   public function newForm_post()
+   {
+      $form_data = $this->get('form_data');
+      $file_data = $this->get('file_data');
+   
+      $data = $this->paperless->addNewForm($form_data, $file_data);
+   
+      if($data) {
+         $this->response([
+            'status' => TRUE,
+            'message' => 'New for has been created!'
+         ], REST_Controller::HTTP_CREATED);
+      } else {
+         $this->response([
+            'status' => FALSE,
+            'message' => 'Failed to create form.'
+         ], REST_Controller::HTTP_BAD_REQUEST);
+      }
+   }
+
+   public function pengajuan_delete()
+   {
+      $batalID = $this->get('batalID');
+      $data = $this->paperless->batalkanPengajuan($batalID);
+
+      if ($data) {
+         $this->response([
+            'status' => TRUE,
+            'data' => $data
+         ], REST_Controller::HTTP_OK);
+      } else {
+         $this->response([
+            'status' => FALSE,
+            'message' => 'Data Not Found!'
+         ], REST_Controller::HTTP_BAD_REQUEST);
       }
    }
 }

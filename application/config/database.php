@@ -95,13 +95,13 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
-$db['paperless'] = array(
+$db['rafindo_dashboard'] = array(
 	'dsn'	=> '',
-	'hostname' => 'grt-server',
-	'username' => 'sa',
-	'password' => 'Admin7777',
-	'database' => 'Paperless',
-	'dbdriver' => 'sqlsrv',
+	'hostname' => 'localhost',
+	'username' => 'rafiindo',
+	'password' => '@Rafiindo123-',
+	'database' => 'rafindo_dashboard',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
@@ -114,5 +114,6 @@ $db['paperless'] = array(
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
-	'save_queries' => TRUE
+	'save_queries' => TRUE,
+   'port' => 3309
 );
