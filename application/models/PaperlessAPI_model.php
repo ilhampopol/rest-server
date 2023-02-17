@@ -62,12 +62,14 @@ class PaperlessAPI_model extends CI_Model
 
    public function addNewForm($form_data, $file_data)
    {
-      var_dump($file_data);
-      die;
       $this->db->insert('paper_file', $file_data);
-      $this->db->insert('paper_form', $form_data);
+      $file_id = $this->db->insert_id();
 
-      return $this->_server->affected_rows();
+      $form_data['form_id'] = $file_id;
+      $this->db->insert('paper_form', $form_data);
+      $form_id = $this->db->insert_id();
+
+      return $form_id;
    }
 
    public function batalkanPengajuan($batalID)
