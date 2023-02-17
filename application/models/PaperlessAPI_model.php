@@ -62,8 +62,8 @@ class PaperlessAPI_model extends CI_Model
 
    public function addNewForm($form_data, $file_data)
    {
-      $this->_server->insert('paper_file', $file_data);
       $this->_server->insert('paper_form', $form_data);
+      $this->_server->insert('paper_file', $file_data);
 
       return $this->_server->affected_rows();
    }
@@ -80,6 +80,30 @@ class PaperlessAPI_model extends CI_Model
    {
       $this->_server->where('form_id', $form_id);
       $this->_server->update('paper_file', $file_data);
+
+      return $this->_server->affected_rows();
+   }
+
+   public function formCheck($form_id, $desc_id, $next_dept, $checked, $status)
+   {
+      $this->_server->set('desc_id', $desc_id);
+      $this->_server->set('next_dept', $next_dept);
+      $this->_server->set('desc_id', $desc_id);
+
+      if ($status == 'checked-by1') {
+         $this->_server->set('checked_by1', $checked);
+      } elseif ($status == 'checked-by2') {
+         $this->_server->set('checked_by2', $checked);
+      } elseif ($status == 'known-by') {
+         $this->_server->set('known_by', $checked);
+      } else if ($status == 'approved-by') {
+         $this->_server->set('approved_by', $checked);
+      } else if ($status == 'paid-by') {
+         $this->_server->set('paid_by', $checked);
+      }
+
+      $this->_server->where('form_id', $form_id);
+      $this->_server->update('paper_form');
 
       return $this->_server->affected_rows();
    }

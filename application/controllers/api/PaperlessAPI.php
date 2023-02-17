@@ -143,4 +143,27 @@ class PaperlessAPI extends REST_Controller
          ], REST_Controller::HTTP_BAD_REQUEST);
       }
    }
+
+   public function formCheck_put()
+   {
+      $form_id = $this->put('form_id');
+      $desc_id = $this->put('desc_id');
+      $next_dept = $this->put('next_dept');
+      $checked = $this->put('checked');
+      $status = $this->put('status');
+
+      $data = $this->paperless->formCheck($form_id, $desc_id, $next_dept, $checked, $status);
+
+      if ($data) {
+         $this->response([
+            'status' => TRUE,
+            'message' => 'Form has been updated'
+         ], REST_Controller::HTTP_NO_CONTENT);
+      } else {
+         $this->response([
+            'status' => FALSE,
+            'message' => 'Failed to update form.'
+         ], REST_Controller::HTTP_BAD_REQUEST);
+      }
+   }
 }
