@@ -68,7 +68,7 @@ class PaperlessAPI_model extends CI_Model
       return $this->_server->affected_rows();
    }
 
-   public function batalkanPengajuan($batalID)
+   public function cancelForm($batalID)
    {
       $this->_server->where('form_id', $batalID)->delete('paper_form');
       $this->_server->where('form_id', $batalID)->delete('paper_file');
@@ -84,7 +84,7 @@ class PaperlessAPI_model extends CI_Model
       return $this->_server->affected_rows();
    }
 
-   public function formCheck($form_id, $desc_id, $next_dept, $checked, $status)
+   public function approveForm($form_id, $desc_id, $next_dept, $checked, $status)
    {
       $this->_server->set('desc_id', $desc_id);
       $this->_server->set('next_dept', $next_dept);
@@ -102,6 +102,15 @@ class PaperlessAPI_model extends CI_Model
          $this->_server->set('paid_by', $checked);
       }
 
+      $this->_server->where('form_id', $form_id);
+      $this->_server->update('paper_form');
+
+      return $this->_server->affected_rows();
+   }
+
+   public function rejectForm($form_id, $desc_id)
+   {
+      $this->_server->set('desc_id', $desc_id);
       $this->_server->where('form_id', $form_id);
       $this->_server->update('paper_form');
 

@@ -99,7 +99,7 @@ class PaperlessAPI extends REST_Controller
       }
    }
 
-   public function batalkanPengajuan_delete()
+   public function cancelForm_delete()
    {
       $batalID = $this->delete('batalID');
 
@@ -109,7 +109,7 @@ class PaperlessAPI extends REST_Controller
             'message' => 'Provide an id!'
          ], REST_Controller::HTTP_BAD_REQUEST);
       } else {
-         if ($this->paperless->batalkanPengajuan($batalID) > 0) {
+         if ($this->paperless->cancelForm($batalID) > 0) {
             // OK
             $this->response([
                'status' => TRUE,
@@ -134,17 +134,17 @@ class PaperlessAPI extends REST_Controller
       if ($this->paperless->updateFile($form_id, $file_data) > 0) {
          $this->response([
             'status' => TRUE,
-            'message' => 'Form has been updated'
+            'message' => 'File has been updated'
          ], REST_Controller::HTTP_NO_CONTENT);
       } else {
          $this->response([
             'status' => FALSE,
-            'message' => 'Failed to update form.'
+            'message' => 'Failed to update file.'
          ], REST_Controller::HTTP_BAD_REQUEST);
       }
    }
 
-   public function formCheck_put()
+   public function approveForm_put()
    {
       $form_id = $this->put('form_id');
       $desc_id = $this->put('desc_id');
@@ -152,17 +152,35 @@ class PaperlessAPI extends REST_Controller
       $checked = $this->put('checked');
       $status = $this->put('status');
 
-      $data = $this->paperless->formCheck($form_id, $desc_id, $next_dept, $checked, $status);
+      $data = $this->paperless->approveForm($form_id, $desc_id, $next_dept, $checked, $status);
 
       if ($data) {
          $this->response([
             'status' => TRUE,
-            'message' => 'Form has been updated'
+            'message' => 'Form has been approved'
          ], REST_Controller::HTTP_NO_CONTENT);
       } else {
          $this->response([
             'status' => FALSE,
-            'message' => 'Failed to update form.'
+            'message' => 'Failed to approve form.'
+         ], REST_Controller::HTTP_BAD_REQUEST);
+      }
+   }
+
+   public function rejectForm_put()
+   {
+      $form_id = $this->put('form_id');
+      $desc_id = $this->put('desc_id');
+
+      if ($this->paperless->rejectForm($form_id, $desc_id) > 0) {
+         $this->response([
+            'status' => TRUE,
+            'message' => 'Form has been rejected'
+         ], REST_Controller::HTTP_NO_CONTENT);
+      } else {
+         $this->response([
+            'status' => FALSE,
+            'message' => 'Failed to reject form.'
          ], REST_Controller::HTTP_BAD_REQUEST);
       }
    }
