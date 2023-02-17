@@ -60,7 +60,7 @@ class PaperlessAPI_model extends CI_Model
       return $result;
    }
 
-   public function addNewForm($form_data, $file_data)
+   public function addNewForm($form_data)
    {
       // var_dump($form_data);
       // die;
