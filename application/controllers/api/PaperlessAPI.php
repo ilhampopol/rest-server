@@ -83,11 +83,9 @@ class PaperlessAPI extends REST_Controller
    
    public function newForm_post()
    {
-      // $form_data = $this->input->post('form_data');
+      $form_data = $this->post('form_data');
       // $file_data = $this->post('file_data');
-      $request = file_get_contents('php://input');
-      $data = json_decode($request, true);
-      var_dump($data);
+      var_dump($form_data);
       die;
 
       if ($this->paperless->addNewForm($form_data) > 0) {
