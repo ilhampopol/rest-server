@@ -101,7 +101,7 @@ class PaperlessAPI extends REST_Controller
 
    public function pengajuan_delete()
    {
-      $batalID = $this->get('batalID');
+      $batalID = $this->delete('batalID');
 
       if ($batalID === null) {
          $this->response([
