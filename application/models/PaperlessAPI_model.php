@@ -65,7 +65,7 @@ class PaperlessAPI_model extends CI_Model
       // var_dump($form_data);
       // die;
       // $this->db->insert('paper_file', $file_data);
-      $this->db->insert('paper_form', $form_data);
+      $this->_server->insert('paper_form', $form_data);
 
       return $this->_server->affected_rows();
    }
