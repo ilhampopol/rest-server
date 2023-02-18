@@ -45,7 +45,8 @@ class PaperlessAPI_model extends CI_Model
 
    public function getFormById($id)
    {
-      $query = "SELECT f.id,d.dept_desc,f.form_id,f.desc_id,f.next_dept,f.keperluan,f.dana,f.date_required,pf.lampiran,f.created_by,f.checked_by1,f.checked_by2,f.known_by,f.approved_by,f.paid_by
+      $query = "SELECT f.id,d.dept_desc,f.form_id,f.desc_id,f.for_dept,f.next_dept,f.keperluan,f.dana,f.date_required,
+               pf.lampiran,f.created_by,f.checked_by1,f.checked_by2,f.known_by,f.approved_by,f.paid_by
                FROM paper_dept AS d
                JOIN paper_form AS f
                ON d.dept_id = f.for_dept
