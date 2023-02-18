@@ -33,8 +33,7 @@ class PaperlessAPI_model extends CI_Model
    public function getAllForm()
    {
       $query =
-         "SELECT d.description,f.id,f.desc_id,f.form_id,f.keperluan,f.dana,f.date_required,
-               pf.lampiran1,pf.lampiran2,pf.lampiran3,pf.file_type1,pf.file_type2,pf.file_type3,f.created_by
+         "SELECT d.description,f.id,f.desc_id,f.form_id,f.keperluan,f.dana,f.date_required,pf.lampiran,pf.file_type,f.created_by
                FROM paper_desc AS d
                JOIN paper_form AS f ON d.desc_id = f.desc_id
                JOIN paper_file AS pf ON f.form_id = pf.form_id";
